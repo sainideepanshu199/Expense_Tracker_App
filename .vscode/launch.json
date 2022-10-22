@@ -9,7 +9,7 @@
       "stopAtEntry": false,
       "externalConsole": true,
       "cwd": "c:/Users/hp/development/projects/my_app",
-      "program": "c:/Users/hp/development/projects/my_app/build/Debug/outDebug",
+      "program": "c:/Users/hp/development/projects/my_app/build/Debug/outDebug.exe",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

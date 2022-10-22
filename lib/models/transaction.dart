@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 class Transaction {
   final String id;
@@ -6,13 +6,10 @@ class Transaction {
   final double amount;
   final DateTime date;
 
-//properties of transasction class
-//creating transaction constructor to use trnasaction class properties and create objects using it.
-  Transaction(
-      {@required this.id,
-      @required this.title,
-      @required this.amount,
-      @required this.date});
-  //named arguments
-  // @required is added as all these properties are required
+  Transaction({
+    @required this.id,
+    @required this.title,
+    @required this.amount,
+    @required this.date,
+  });
 }
