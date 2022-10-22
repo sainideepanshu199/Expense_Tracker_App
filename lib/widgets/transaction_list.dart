@@ -13,7 +13,7 @@ class TransactionList extends StatelessWidget {
     return Container(
       height: 300,
       child: ListView.builder(
-        itemBuilder: (ctx, index) {
+        itemBuilder: (context, index) {
           return Card(
             child: Row(
               children: <Widget>[
