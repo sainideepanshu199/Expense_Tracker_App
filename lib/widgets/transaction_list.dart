@@ -25,7 +25,7 @@ class TransactionList extends StatelessWidget {
                 Container(
                   height: 180,
                   child: Image.asset(
-                    'assets/images/img.png',
+                    'assets/images/empty_list.webp',
                     fit: BoxFit.cover,
                   ),
                 ),

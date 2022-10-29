@@ -5,6 +5,7 @@ import 'package:flutter_complete_guide/widgets/new_transaction.dart';
 import './widgets/new_transaction.dart';
 import './widgets/transaction_list.dart';
 import './models/transaction.dart';
+import './widgets/chart.dart';
 
 void main() => runApp(MyApp());
 
@@ -44,6 +45,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   // String titleInput;
   final List<Transaction> _userTransactions = [];
+
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
 
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
@@ -94,14 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Container(
-                width: double.infinity,
-                child: Card(
-                  child: Text('CHART!'),
-                  color: Colors.green,
-                  elevation: 5,
-                ),
-              ),
+              Chart(_recentTransactions),
               TransactionList(_userTransactions),
             ],
           ),
