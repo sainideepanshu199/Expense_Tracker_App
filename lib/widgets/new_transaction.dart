@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class NewTransaction extends StatefulWidget {
   final Function addTx;
@@ -49,6 +50,9 @@ class _NewTransactionState extends State<NewTransaction> {
               decoration: InputDecoration(labelText: 'Amount'),
               controller: amountController,
               keyboardType: TextInputType.number,
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+              ],
               onSubmitted: (_) => submitData(),
               // onChanged: (val) => amountInput = val,
             ),
