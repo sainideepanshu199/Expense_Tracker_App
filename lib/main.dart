@@ -1,4 +1,4 @@
-// ignore_for_file: missing_required_param, missing_return, unused_element, unused_import, deprecated_member_use
+// ignore_for_file: missing_required_param, missing_return, unused_element, unused_import, deprecated_member_use, unused_local_variable
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -99,6 +99,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     final appBar = AppBar(
       actions: [
         IconButton(
@@ -113,14 +115,20 @@ class _MyHomePageState extends State<MyHomePage> {
         style: TextStyle(fontFamily: 'Open Sans', fontSize: 20),
       ),
     );
+    final txListWidget = Container(
+        height: (MediaQuery.of(context).size.height -
+                appBar.preferredSize.height -
+                MediaQuery.of(context).padding.top) *
+            0.7,
+        child: TransactionList(_userTransactions, _deleteTransaction));
+
     return Scaffold(
       appBar: appBar,
-      body: Container(
-        child: SingleChildScrollView(
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            if (isLandscape)
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -135,22 +143,25 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               ),
+            if (!isLandscape)
+              Container(
+                  height: (MediaQuery.of(context).size.height -
+                          appBar.preferredSize.height -
+                          MediaQuery.of(context).padding.top) *
+                      0.3,
+                  child: Chart(_recentTransactions)),
+            if (!isLandscape) txListWidget,
+            if (isLandscape)
               _showChart
                   ? Container(
                       height: (MediaQuery.of(context).size.height -
                               appBar.preferredSize.height -
                               MediaQuery.of(context).padding.top) *
                           0.7,
-                      child: Chart(_recentTransactions))
-                  : Container(
-                      height: (MediaQuery.of(context).size.height -
-                              appBar.preferredSize.height -
-                              MediaQuery.of(context).padding.top) *
-                          0.7,
-                      child: TransactionList(
-                          _userTransactions, _deleteTransaction)),
-            ],
-          ),
+                      child: Chart(_recentTransactions),
+                    )
+                  : txListWidget,
+          ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
