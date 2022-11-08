@@ -8,7 +8,9 @@ import './bars.dart';
 
 class Chart extends StatelessWidget {
   final List<Transaction> recentTransactions;
-  Chart(this.recentTransactions);
+  Chart(this.recentTransactions) {
+    print('constructor chart');
+  }
 
   List<Map<String, Object>> get groupedTransactionValues {
     return List.generate(7, (index) {
@@ -32,18 +34,19 @@ class Chart extends StatelessWidget {
 
   double get maxSpending {
     return groupedTransactionValues.fold(0.0, (sum, item) {
-      return sum + (item['amount'] as double);
+      return sum + item['amount'];
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    print('build() chart');
     print(groupedTransactionValues);
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
       child: Container(
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.all(10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: groupedTransactionValues.map((data) {
