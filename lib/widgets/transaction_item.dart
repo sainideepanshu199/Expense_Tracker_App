@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_types, deprecated_member_use
 
 import 'package:flutter/material.dart';
 import '../models/transaction.dart';
@@ -16,6 +16,22 @@ class Transaction_item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final snackBar = SnackBar(
+      backgroundColor: Colors.green,
+      elevation: 5,
+      content: Row(children: [
+        SizedBox(
+          width: 20,
+          height: 25,
+        ),
+        Expanded(
+            child: Text('removed' + ' ' + '${transaction.title}',
+                textAlign: TextAlign.justify,
+                style: TextStyle(
+                  fontSize: 15,
+                )))
+      ]),
+    );
     return Card(
       elevation: 5,
       margin: const EdgeInsets.symmetric(
@@ -57,6 +73,7 @@ class Transaction_item extends StatelessWidget {
                 color: Theme.of(context).errorColor,
                 onPressed: (() {
                   deleteTx(transaction.id);
+                  Scaffold.of(context).showSnackBar(snackBar);
                 }),
               ),
       ),
